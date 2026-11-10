@@ -1,8 +1,16 @@
-// Versi awal (masih salah): IPK dihitung dengan rata-rata biasa
-function hitungIpk(semester) {
-  if (semester.length === 0) return 0;
-  const total = semester.reduce((a, s) => a + s.ips, 0);
-  return Math.round((total / semester.length) * 100) / 100;
+function hitungIpk(semesters) {
+  let totalBobot = 0;
+  let totalSks = 0;
+
+  for (const sem of semesters) {
+    totalBobot += sem.ips * sem.sks;
+    totalSks += sem.sks;
+  }
+
+  if (totalSks === 0) return 0;
+  
+  // Membulatkan hasil ke 2 tempat desimal jika diperlukan, atau kembalikan angka langsung
+  return Number((totalBobot / totalSks).toFixed(2));
 }
 
-module.exports = { hitungIpk };
+module.exports = hitungIpk;
